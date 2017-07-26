@@ -1,24 +1,48 @@
 //write the code you need to grab the data from keys.js. Then store the keys in a variable.
-
+var keys = require('keys.js');
 var twitterKeys = require('twitterKeys');
-
-//from the documentation 
-//var Twitter = require('twitter');
-
-
+var spotifyKeys =  require('spotifyKeys');
+var movieKeys = require('movieKeys');
 
 
 //Make it so liri.js can take in one of the following commands:
 
 // node liri.js my-tweets
 //This will show your last 20 tweets and when they were created at in your terminal/bash window.
-
+var Twitter = require('twitter');
+ 
+var client = new Twitter({
+  consumer_key: '',
+  consumer_secret: '',
+  access_token_key: '',
+  access_token_secret: ''
+});
+ 
+var params = {screen_name: 'nodejs'};
+client.get('statuses/user_timeline', params, function(error, tweets, response) {
+  if (!error) {
+    console.log(tweets);
+  }
+});
 
 
 // spotify-this-song
-//node liri.js spotify-this-song '<song name here>'
+//command should be:  node liri.js spotify-this-song '<song name here>'
 
-
+var Spotify = require('node-spotify-api');
+ 
+var spotify = new Spotify({
+  id: <your spotify client id>,
+  secret: <your spotify client secret>
+});
+ 
+spotify.search({ type: 'track', query: 'All the Small Things' }, function(err, data) {
+  if (err) {
+    return console.log('Error occurred: ' + err);
+  }
+ 
+console.log(data); 
+});
 
 
 
@@ -32,10 +56,26 @@ var twitterKeys = require('twitterKeys');
 // * Language of the movie.
 // * Plot of the movie.
 //* Actors in the movie.
+//Be sure to put in the key info for the movie api 
+//FORMAT:  http://www.omdbapi.com/?apikey=[yourkey]&
+var request = require('request');
+request('http://www.omdbapi.com/?apikey=[moviekeys]&', function (error, response, body) {
+  console.log('error:', error); // Print the error if one occurred 
+  console.log('statusCode:', response && response.statusCode); // Print the response status code if a response was received 
+  console.log('body:', body); // Print the HTML for the Google homepage. 
+});
+
+
+
 
 // do-what-it-says
 //node liri.js do-what-it-says
+//need the built-in fs package here
+var fs = require('fs');
 
+
+
+//store the commands the user enters and call the value/action linked to them
 var command = process.argv[2];
 var value = process.argv[3];
 
@@ -88,4 +128,12 @@ function random(){
 
 //RESOURCES and QUESTIONS 
 //https://www.npmjs.com/package/twitter
+// twitter rest api info here:  https://www.npmjs.com/package/twitter
+// 
+// 
+// 
+// 
+// 
+// 
+// 
 ////do I need to load the fs package here?

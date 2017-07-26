@@ -16,13 +16,14 @@ exports.twitterKeys = {
 exports.spotifyKeys = {
   client_key: '<7fdeef013079450483a01bf3ffae5ed5>',
   client_secret: '<caebaac2804b4ceb8eecf25b801c10f2>',
-  access_token_key: '<input here>',
-  access_token_secret: '<input here>',
+  // access_token_key: '<input here>',
+  // access_token_secret: '<input here>',
 }
 
 
 
 // //OMDB
+//doube check the format for this one (since the key is now in the liri doc)
 // exports.movieKeys = {
 //   consumer_key: '<40e9cece>',
 //   consumer_secret: '<input here>',
