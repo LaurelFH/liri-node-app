@@ -9,53 +9,45 @@ var movieKeys = require('movieKeys');
 
 // node liri.js my-tweets
 //This will show your last 20 tweets and when they were created at in your terminal/bash window.
-var Twitter = require('twitter');
+// var Twitter = require('twitter');
  
-var client = new Twitter({
-  consumer_key: '',
-  consumer_secret: '',
-  access_token_key: '',
-  access_token_secret: ''
-});
+// var client = new Twitter({
+//   consumer_key: '',
+//   consumer_secret: '',
+//   access_token_key: '',
+//   access_token_secret: ''
+// });
  
-var params = {screen_name: 'nodejs'};
-client.get('statuses/user_timeline', params, function(error, tweets, response) {
-  if (!error) {
-    console.log(tweets);
-  }
-});
+// var params = {screen_name: 'nodejs'};
+// client.get('statuses/user_timeline', params, function(error, tweets, response) {
+//   if (!error) {
+//     console.log(tweets);
+//   }
+// });
 
 
 // spotify-this-song
 //command should be:  node liri.js spotify-this-song '<song name here>'
 
-var Spotify = require('node-spotify-api');
+// var Spotify = require('node-spotify-api');
  
-var spotify = new Spotify({
-  id: <your spotify client id>,
-  secret: <your spotify client secret>
-});
+// var spotify = new Spotify({
+//   id: <your spotify client id>,
+//   secret: <your spotify client secret>
+// });
  
-spotify.search({ type: 'track', query: 'All the Small Things' }, function(err, data) {
-  if (err) {
-    return console.log('Error occurred: ' + err);
-  }
+// spotify.search({ type: 'track', query: 'All the Small Things' }, function(err, data) {
+//   if (err) {
+//     return console.log('Error occurred: ' + err);
+//   }
  
-console.log(data); 
-});
+// console.log(data); 
+// });
 
 
 
 // movie-this
 //node liri.js movie-this '<movie name here>'
-//* Title of the movie.
-//* Year the movie came out.
-// * IMDB Rating of the movie.
-// * Rotten Tomatoes Rating of the movie.
-// * Country where the movie was produced.
-// * Language of the movie.
-// * Plot of the movie.
-//* Actors in the movie.
 //Be sure to put in the key info for the movie api 
 //FORMAT:  http://www.omdbapi.com/?apikey=[yourkey]&
 var request = require('request');
@@ -64,7 +56,7 @@ request('http://www.omdbapi.com/?apikey=[moviekeys]&', function (error, response
   console.log('statusCode:', response && response.statusCode); // Print the response status code if a response was received 
   console.log('body:', body); // Print the HTML for the Google homepage. 
 });
-
+//might use const instead of var?
 
 
 
@@ -76,8 +68,8 @@ var fs = require('fs');
 
 
 //store the commands the user enters and call the value/action linked to them
-var command = process.argv[2];
-var value = process.argv[3];
+// var command = process.argv[2];
+// var value = process.argv[3];
 
 
 //FUNCTIONS FOR EACH COMMAND 
@@ -102,8 +94,19 @@ switch (action) {
 }
 
 
-
+//takes in the title entered by the user and sends back title, year, rotten rating,
+// country produced, language, plot, actors 
 function movie(){
+    //captures the name of the movie in the 4th position
+    var movieName = process.argv[3];
+    //builds the URL based on the info from the user 
+    var queryUrl = "http://www.omdbapi.com/?t=" + movieName + "&y=&plot=short&apikey=40e9cece"
+    //console.log the result to test this
+    console.log(queryUrl);
+    
+
+
+
 
 }
 
