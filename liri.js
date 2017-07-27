@@ -53,7 +53,7 @@ function movie(){
     //testing full api call?
     var queryUrl= "http://www.omdbapi.com/?apikey="+keys.movieKeys.apikey +"&t=" + title;
     //make sure the url works
-    console.log(queryUrl);
+    // console.log(queryUrl);
 
     request(queryUrl, function (error, response, body) {
         // console.log('error:', error); // Print the error if one occurred 
@@ -111,41 +111,86 @@ function music(){
 //variable to capture the song title?
   var songTitle = process.argv[3];
 
-  // var spotifyApi = new SpotifyWebApi({
-  //   clientId: keys.spotifyKeys.client_key,
-  //   clientSecret: keys.spotifyKeys.client_secret
+  var spotifyApi = new SpotifyWebApi({
+    clientId: keys.spotifyKeys.client_key,
+    clientSecret: keys.spotifyKeys.client_secret
+  });
+//version that contians a wrapper
+//   spotifyApi.searchTracks(songTitle)
+//     .then(function(data) {
+//      console.log('Search by Song title', data);
+//       }, function(err) {
+//         console.error("Something went wrong with the request", err);
+//       });
+//     //reading the response-- check key/value names! 
+//     // var songInfo = JSON.parse(data);
+//     // console.log(data.name);
+//     // console.log(songInfo.preview_url);
+//     // console.log(songInfo.year);
+
+// //double check the token problem with the other version with 401 error:
+// //https://github.com/thelinmichael/spotify-web-api-node/issues/86
+//   // When our access token will expire
+// var tokenExpirationEpoch;
+// var authorizationCode = 
+// // First retrieve an access token
+// spotifyApi.authorizationCodeGrant(authorizationCode)
+//   .then(function(data) {
+
+//     // Set the access token and refresh token
+//     spotifyApi.setAccessToken(data.body['access_token']);
+//     spotifyApi.setRefreshToken(data.body['refresh_token']);
+
+//     // Save the amount of seconds until the access token expired
+//     tokenExpirationEpoch = (new Date().getTime() / 1000) + data.body['expires_in'];
+//     console.log('Retrieved token. It expires in ' + Math.floor(tokenExpirationEpoch - new Date().getTime() / 1000) + ' seconds!');
+//   }, function(err) {
+//     console.log('Something went wrong when retrieving the access token!', err.message);
+//   });
+
+// // Continually print out the time left until the token expires..
+// var numberOfTimesUpdated = 0;
+
+// setInterval(function() {
+//   console.log('Time left: ' + Math.floor((tokenExpirationEpoch - new Date().getTime() / 1000)) + ' seconds left!');
+
+//   // OK, we need to refresh the token. Stop printing and refresh.
+//   if (++numberOfTimesUpdated > 5) {
+//     clearInterval(this);
+
+//     // Refresh token and print the new time to expiration.
+//     spotifyApi.refreshAccessToken()
+//       .then(function(data) {
+//         tokenExpirationEpoch = (new Date().getTime() / 1000) + data.body['expires_in'];
+//         console.log('Refreshed token. It now expires in ' + Math.floor(tokenExpirationEpoch - new Date().getTime() / 1000) + ' seconds!');
+//       }, function(err) {
+//         console.log('Could not refresh the token!', err.message);
+//       });
+//   }
+// }, 1000);
+
+
+
+
+
+  //version that returns an object 
+  // var spotify = new Spotify({
+  //   id: keys.spotifyKeys.client_key,
+  //   secret: keys.spotifyKeys.client_secret
   // });
 
-  // spotifyApi.searchTracks(songTitle)
-  //   .then(function(data) {
-  //    console.log('Search by Song title', data.body);
-  //     }, function(err) {
-  //       console.error("Something went wrong with the request", err);
-  //     });
-    //reading the response-- check key/value names! 
-    // var songInfo = JSON.parse(body);
-    // console.log(songInfo.name);
-    // console.log(songInfo.preview_url);
-    // console.log(songInfo.year);
-//double check the token problem with the other version with 401 error:
-//https://github.com/thelinmichael/spotify-web-api-node/issues/86
-  var spotify = new Spotify({
-    id: keys.spotifyKeys.client_key,
-    secret: keys.spotifyKeys.client_secret
-  });
-
   
-   //spotify built in call below
-  spotify.search({ type: 'artist', query: songTitle}, function(err, body) {
-    if (err) {
-      return console.log('Error occurred: ' + err );
-    }
-  console.log(body); 
-  // var songInfo = JSON.parse(body);
-  var songInfo = JSON.stringify(body);
-  console.log(songInfo.name);
+  //  //spotify built in call below
+  // spotify.search({ type: 'artist', query: songTitle}, function(err, body) {
+  //   if (err) {
+  //     return console.log('Error occurred: ' + err );
+  //   }
+  // console.log(body); 
+  // // var songInfo = JSON.parse(body);
+  // var songInfo = JSON.stringify(body);
+  // console.log(songInfo.name);
 
-  });
+  // });
 //console log all of the spotify data here; FIND THE JSON FORMAT 
 // o Artist(s)
 // o The song's name
@@ -161,6 +206,7 @@ function random(){
 //and then use it to call one of LIRI's commands.
 //double chek the position of the commands 
 //node liri.js do-what-it-says then another command?
+// var command = process.argv[3];
 
 fs.readFile("random.txt", "utf8", function(error, data){
   //error message
@@ -169,10 +215,54 @@ fs.readFile("random.txt", "utf8", function(error, data){
   }
     //prints out the content of data
     console.log(data);
-    //split it into the command and value?  check the progress.argv positions
+    //turn data into an object or array?
+    var dataArr = [];
+    var data = data.split(",");
+    // dataArr.push(data);
+    // console.log(dataArr);
+    // console.log(data);
+
+    //take the first index and store it as a new command?
+    var newCommand = dataArr[1];
+    // console.log(newCommand); 
+   
 });
 
 //using append etc. to make liri call on one of the other functions?
+  //take the values from the text file, and call one of the functions based on the info?
+//call the switch statement again
+
+  // var command = process.argv[2];
+
+  //  fs.appendFile("random.txt", command, function(error){
+  //   if(error){
+  //     console.log("there was an error:" + error);
+  //   } else{
+
+  //             switch (command) {
+  //         case "movie-this":
+  //           movie();
+  //           break;
+
+  //         case "my-tweets":
+  //           tweets();
+  //           break;
+
+  //         case "spotify-this-song":
+  //           music();
+  //           break;
+
+  //         case "do-what-it-says":
+  //           random();
+  //           break;
+  //       }
+
+  //   }//ends the else
+
+  //  })//ends the appendfile
+
+//set up an if/else functino to do this?
+
 
 
 
@@ -198,11 +288,15 @@ fs.readFile("random.txt", "utf8", function(error, data){
 // Sample response from JSON: https://dev.twitter.com/rest/reference/get/statuses/user_timeline
 //ADD THIS PACKAGE:  https://github.com/thelinmichael/spotify-web-api-node/blob/master/README.md
 // more on fs: https://www.w3schools.com/nodejs/nodejs_filesystem.asp 
+//https://www.tutorialspoint.com/nodejs/nodejs_file_system.htm
+//able to use jquery in node: https://stackoverflow.com/questions/1801160/can-i-use-jquery-with-node-js
+//https://www.npmjs.com/package/jquery
+//fix token problem in spotify:?  http://jkaufman.io/spotify-auth-react-router/
+//https://github.com/thelinmichael/spotify-web-api-node/blob/master/examples/access-token-refresh.js
+//https://stackoverflow.com/questions/39887342/how-can-i-get-an-access-token-spotify-api
+//https://developer.spotify.com/web-api/authorization-guide/
 //
 //
-//
-//
-//
-//
+//https://github.com/thelinmichael/spotify-web-api-node/issues/86
 //TO DO (IN CAPS)
 //DOUBLE CHECK API/URL BUILDS IN BROWSER

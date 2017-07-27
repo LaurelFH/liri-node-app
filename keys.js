@@ -17,6 +17,7 @@ exports.twitterKeys = {
 exports.spotifyKeys = {
   client_key: '7fdeef013079450483a01bf3ffae5ed5',
   client_secret: 'caebaac2804b4ceb8eecf25b801c10f2',
+ // redirectUri: 'http://localhost:3000/callback',
  }
 
 
