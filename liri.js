@@ -1,12 +1,11 @@
 //write the code you need to grab the data from keys.js. Then store the keys in a variable.
-var keys = require('keys.js');
-var twitterKeys = require('twitterKeys');
-var spotifyKeys =  require('spotifyKeys');
-var movieKeys = require('movieKeys');
-
+//DON'T FORGET TO NOTE THIS IS IN THE CURRENT DIR WITH./
+var keys = require('./keys.js');
+// console.log(keys.twitterKeys.consumer_key);
+//test to make sure they are loading here
+console.log(keys);
 
 //Make it so liri.js can take in one of the following commands:
-
 // node liri.js my-tweets
 //This will show your last 20 tweets and when they were created at in your terminal/bash window.
 // var Twitter = require('twitter');
@@ -51,13 +50,23 @@ var movieKeys = require('movieKeys');
 //Be sure to put in the key info for the movie api 
 //FORMAT:  http://www.omdbapi.com/?apikey=[yourkey]&
 var request = require('request');
+//tetsign full api call?
+var queryUrl= "http://www.omdbapi.com/?apikey=40e9cece&t=";
+//capture the title posted by the user 
+var title = process.argv[3];
+
+
+
+
 request('http://www.omdbapi.com/?apikey=[moviekeys]&', function (error, response, body) {
   console.log('error:', error); // Print the error if one occurred 
   console.log('statusCode:', response && response.statusCode); // Print the response status code if a response was received 
   console.log('body:', body); // Print the HTML for the Google homepage. 
 });
-//might use const instead of var?
 
+
+
+//might use const instead of var?
 
 
 // do-what-it-says
@@ -103,7 +112,7 @@ function movie(){
     var queryUrl = "http://www.omdbapi.com/?t=" + movieName + "&y=&plot=short&apikey=40e9cece"
     //console.log the result to test this
     console.log(queryUrl);
-    
+
 
 
 
@@ -132,11 +141,11 @@ function random(){
 //RESOURCES and QUESTIONS 
 //https://www.npmjs.com/package/twitter
 // twitter rest api info here:  https://www.npmjs.com/package/twitter
+// npm for omdb for later exploration:  https://www.npmjs.com/package/omdb
 // 
 // 
 // 
 // 
 // 
-// 
-// 
-////do I need to load the fs package here?
+// TO DO (IN CAPS)
+//DOUBLE CHECK API/URL BUILDS IN BROWSER
