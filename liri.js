@@ -1,6 +1,7 @@
 //write the code you need to grab the data from keys.js. Then store the keys in a variable.
 //DON'T FORGET TO NOTE THIS IS IN THE CURRENT DIR WITH./
 var keys = require('./keys.js');
+var request = require('request');
 // console.log(keys.twitterKeys.consumer_key);
 //test to make sure they are loading here
 console.log(keys);
@@ -45,24 +46,6 @@ console.log(keys);
 
 
 
-// movie-this
-//node liri.js movie-this '<movie name here>'
-//Be sure to put in the key info for the movie api 
-//FORMAT:  http://www.omdbapi.com/?apikey=[yourkey]&
-var request = require('request');
-//tetsign full api call?
-var queryUrl= "http://www.omdbapi.com/?apikey=40e9cece&t=";
-//capture the title posted by the user 
-var title = process.argv[3];
-
-
-
-
-request('http://www.omdbapi.com/?apikey=[moviekeys]&', function (error, response, body) {
-  console.log('error:', error); // Print the error if one occurred 
-  console.log('statusCode:', response && response.statusCode); // Print the response status code if a response was received 
-  console.log('body:', body); // Print the HTML for the Google homepage. 
-});
 
 
 
@@ -83,6 +66,7 @@ var fs = require('fs');
 
 //FUNCTIONS FOR EACH COMMAND 
 //switch block to help liri figure out what to do in each case for the calls 
+var action = process.argv[2];
 
 switch (action) {
   case "movie-this":
@@ -106,17 +90,37 @@ switch (action) {
 //takes in the title entered by the user and sends back title, year, rotten rating,
 // country produced, language, plot, actors 
 function movie(){
-    //captures the name of the movie in the 4th position
-    var movieName = process.argv[3];
-    //builds the URL based on the info from the user 
-    var queryUrl = "http://www.omdbapi.com/?t=" + movieName + "&y=&plot=short&apikey=40e9cece"
-    //console.log the result to test this
+    // movie-this
+    //node liri.js movie-this '<movie name here>'
+    //Be sure to put in the key info for the movie api 
+    //FORMAT:  http://www.omdbapi.com/?apikey=[yourkey]&
+    
+
+    //capture the title posted by the user 
+    //double check what to do if more than one word movie title!!!! 
+    var title = process.argv[3];
+    //testing full api call?
+    var queryUrl= "http://www.omdbapi.com/?apikey="+keys.movieKeys.apikey +"&t=" + title;
+    //make sure the url works
     console.log(queryUrl);
 
+    request(queryUrl, function (error, response, body) {
+        // console.log('error:', error); // Print the error if one occurred 
+        // console.log('statusCode:', response && response.statusCode); // Print the response status code if a response was received 
+        // console.log('body:', body); // Print the HTML for the Google homepage. 
+        var movieInfo = JSON.parse(body);
+        //print out specific info from the body
+
+        console.log("Title: " + movieInfo.Title);
+        console.log("Year: " + movieInfo.Year);
+        console.log("IMDB Rating: " + movieInfo.Ratings[2].Value);
+        console.log("Rotten Tomatoes Rating: " + movieInfo.Ratings[1].Value);
+        console.log("Country: " + movieInfo.Country);
+        console.log("Language: " + movieInfo.Language);
+        console.log("Plot: " + movieInfo.Plot);
 
 
-
-
+      });
 }
 
 
