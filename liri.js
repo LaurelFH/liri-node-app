@@ -3,6 +3,7 @@
 var keys = require('./keys.js');
 var request = require('request');
 var Spotify = require('node-spotify-api');
+var SpotifyWebApi = require('spotify-web-api-node');
 var Twitter = require('twitter');
 //test to make sure they are loading here
 // console.log(keys.twitterKeys.consumer_key);
@@ -93,14 +94,21 @@ var client = new Twitter({
   access_token_secret: keys.twitterKeys.access_token_secret
 });
  //check my username for that account may not have the spaces/underscores
- var userName= "Our_Lady_of_Memes"
-var params = {screen_name: username};
+ var userName= "OurLadyofMemes"
+var params = {screen_name: userName, count: 20, include_rts: true};
 client.get('statuses/user_timeline', params, function(error, tweets, response) {
   if (!error) {
-    console.log(tweets);
-  }
-  //console.log the text of the tweets from the JSON?
-  console.log(tweets.text);
+   //making sure I got the tweets loaded
+   for(var i = 0; i <= tweets.length; i++){
+    console.log(tweets[i].text);
+     console.log(tweets[i].created_at);
+   }//ends my for loop
+    // console.log(response);
+    // var tweetInfo = JSON.parse(response);
+    // console.log(tweetInfo.text);
+  }//ends the if not an error statement
+  // //console.log the text of the tweets from the JSON?
+  // console.log(tweets.text);
 });
 
 
@@ -113,10 +121,30 @@ function music(){
 //variable to capture the song title?
   var songTitle = process.argv[3];
 
+  // var spotifyApi = new SpotifyWebApi({
+  //   clientId: keys.spotifyKeys.client_key,
+  //   clientSecret: keys.spotifyKeys.client_secret
+  // });
+
+  // spotifyApi.searchTracks(songTitle)
+  //   .then(function(data) {
+  //    console.log('Search by Song title', data.body);
+  //     }, function(err) {
+  //       console.error("Something went wrong with the request", err);
+  //     });
+    //reading the response-- check key/value names! 
+    // var songInfo = JSON.parse(body);
+    // console.log(songInfo.name);
+    // console.log(songInfo.preview_url);
+    // console.log(songInfo.year);
+//double check the token problem with the other version with 401 error:
+//https://github.com/thelinmichael/spotify-web-api-node/issues/86
   var spotify = new Spotify({
     id: keys.spotifyKeys.client_key,
     secret: keys.spotifyKeys.client_secret
   });
+
+  
    //spotify built in call below
   spotify.search({ type: 'artist', query: songTitle}, function(err, body) {
     if (err) {
@@ -125,8 +153,7 @@ function music(){
   console.log(body); 
   // var songInfo = JSON.parse(body);
   var songInfo = JSON.stringify(body);
-  console.log(songInfo.album.name);
-
+  console.log(songInfo.name);
 
   });
 //console log all of the spotify data here; FIND THE JSON FORMAT 
