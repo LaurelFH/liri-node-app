@@ -5,16 +5,10 @@ var request = require('request');
 var Spotify = require('node-spotify-api');
 var SpotifyWebApi = require('spotify-web-api-node');
 var Twitter = require('twitter');
+var fs = require('fs');
 //test to make sure they are loading here
 // console.log(keys.twitterKeys.consumer_key);
 // console.log(keys.spotifyKeys);
-
-
-
-// do-what-it-says
-//node liri.js do-what-it-says
-//need the built-in fs package here
-var fs = require('fs');
 
 
 
@@ -22,12 +16,11 @@ var fs = require('fs');
 // var command = process.argv[2];
 // var value = process.argv[3];
 
-
-//FUNCTIONS FOR EACH COMMAND 
+//////////////FUNCTIONS FOR EACH COMMAND 
 //switch block to help liri figure out what to do in each case for the calls 
-var action = process.argv[2];
+var command = process.argv[2];
 
-switch (action) {
+switch (command) {
   case "movie-this":
     movie();
     break;
@@ -110,10 +103,7 @@ client.get('statuses/user_timeline', params, function(error, tweets, response) {
   // //console.log the text of the tweets from the JSON?
   // console.log(tweets.text);
 });
-
-
-
-}
+}//ends tweet function 
 
 function music(){
 // spotify-this-song
@@ -164,11 +154,30 @@ function music(){
 //// • If no song is provided then your program will default to "The Sign" by Ace of Base.
    // console.log(data.album.name);
 
-
-
 }
 
 function random(){
+//Using the fs Node package, LIRI will take the text inside of random.txt 
+//and then use it to call one of LIRI's commands.
+//double chek the position of the commands 
+//node liri.js do-what-it-says then another command?
+
+fs.readFile("random.txt", "utf8", function(error, data){
+  //error message
+  if(error){
+    console.log("there was a problem reading this file:" + error);
+  }
+    //prints out the content of data
+    console.log(data);
+    //split it into the command and value?  check the progress.argv positions
+});
+
+//using append etc. to make liri call on one of the other functions?
+
+
+
+
+
 
 }
 
@@ -188,5 +197,12 @@ function random(){
 // More on endpoints for twitter:  https://dev.twitter.com/rest/reference
 // Sample response from JSON: https://dev.twitter.com/rest/reference/get/statuses/user_timeline
 //ADD THIS PACKAGE:  https://github.com/thelinmichael/spotify-web-api-node/blob/master/README.md
-// TO DO (IN CAPS)
+// more on fs: https://www.w3schools.com/nodejs/nodejs_filesystem.asp 
+//
+//
+//
+//
+//
+//
+//TO DO (IN CAPS)
 //DOUBLE CHECK API/URL BUILDS IN BROWSER

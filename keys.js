@@ -13,6 +13,7 @@ exports.twitterKeys = {
 
 
 // SPOTIFY
+//may need new access token if using th web node one 
 exports.spotifyKeys = {
   client_key: '7fdeef013079450483a01bf3ffae5ed5',
   client_secret: 'caebaac2804b4ceb8eecf25b801c10f2',
