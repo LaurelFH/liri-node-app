@@ -92,13 +92,15 @@ var client = new Twitter({
   access_token_key: keys.twitterKeys.access_token_key,
   access_token_secret: keys.twitterKeys.access_token_secret
 });
- 
+ //check my username for that account may not have the spaces/underscores
  var userName= "Our_Lady_of_Memes"
 var params = {screen_name: username};
 client.get('statuses/user_timeline', params, function(error, tweets, response) {
   if (!error) {
     console.log(tweets);
   }
+  //console.log the text of the tweets from the JSON?
+  console.log(tweets.text);
 });
 
 
@@ -156,7 +158,8 @@ function random(){
 // data that returns for the spotify api:  https://developer.spotify.com/web-api/endpoint-reference/
 // more on data for the spotify api track info JSON:  https://developer.spotify.com/web-api/get-track/
 // https://developer.spotify.com/web-api/search-item/
-// More on endpoitsn for twitter:  https://dev.twitter.com/rest/reference
-// 
+// More on endpoints for twitter:  https://dev.twitter.com/rest/reference
+// Sample response from JSON: https://dev.twitter.com/rest/reference/get/statuses/user_timeline
+//ADD THIS PACKAGE:  https://github.com/thelinmichael/spotify-web-api-node/blob/master/README.md
 // TO DO (IN CAPS)
 //DOUBLE CHECK API/URL BUILDS IN BROWSER
