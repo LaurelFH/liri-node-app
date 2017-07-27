@@ -2,54 +2,12 @@
 //DON'T FORGET TO NOTE THIS IS IN THE CURRENT DIR WITH./
 var keys = require('./keys.js');
 var request = require('request');
-// console.log(keys.twitterKeys.consumer_key);
+var Spotify = require('node-spotify-api');
+var Twitter = require('twitter');
 //test to make sure they are loading here
-console.log(keys);
+// console.log(keys.twitterKeys.consumer_key);
+// console.log(keys.spotifyKeys);
 
-//Make it so liri.js can take in one of the following commands:
-// node liri.js my-tweets
-//This will show your last 20 tweets and when they were created at in your terminal/bash window.
-// var Twitter = require('twitter');
- 
-// var client = new Twitter({
-//   consumer_key: '',
-//   consumer_secret: '',
-//   access_token_key: '',
-//   access_token_secret: ''
-// });
- 
-// var params = {screen_name: 'nodejs'};
-// client.get('statuses/user_timeline', params, function(error, tweets, response) {
-//   if (!error) {
-//     console.log(tweets);
-//   }
-// });
-
-
-// spotify-this-song
-//command should be:  node liri.js spotify-this-song '<song name here>'
-
-// var Spotify = require('node-spotify-api');
- 
-// var spotify = new Spotify({
-//   id: <your spotify client id>,
-//   secret: <your spotify client secret>
-// });
- 
-// spotify.search({ type: 'track', query: 'All the Small Things' }, function(err, data) {
-//   if (err) {
-//     return console.log('Error occurred: ' + err);
-//   }
- 
-// console.log(data); 
-// });
-
-
-
-
-
-
-//might use const instead of var?
 
 
 // do-what-it-says
@@ -93,8 +51,7 @@ function movie(){
     // movie-this
     //node liri.js movie-this '<movie name here>'
     //Be sure to put in the key info for the movie api 
-    //FORMAT:  http://www.omdbapi.com/?apikey=[yourkey]&
-    
+    //FORMAT:  http://www.omdbapi.com/?apikey=[yourkey]&  
 
     //capture the title posted by the user 
     //double check what to do if more than one word movie title!!!! 
@@ -119,16 +76,65 @@ function movie(){
         console.log("Language: " + movieInfo.Language);
         console.log("Plot: " + movieInfo.Plot);
 
-
       });
 }
 
 
 function tweets(){
 
+//Make it so liri.js can take in one of the following commands:
+// node liri.js my-tweets
+//This will show your last 20 tweets and when they were created at in your terminal/bash window.
+
+// var client = new Twitter({
+//   consumer_key: keys.twitterKeys.consumer_key,
+//   consumer_secret: keys.twitterKeys.consumer_secret,
+//   access_token_key: keys.twitterKeys.access_token_key,
+//   access_token_secret: keys.twitterKeys.access_token_secret
+// });
+ 
+// var params = {screen_name: 'nodejs'};
+// client.get('statuses/user_timeline', params, function(error, tweets, response) {
+//   if (!error) {
+//     console.log(tweets);
+//   }
+// });
+
+
+
+
 }
 
 function music(){
+// spotify-this-song
+//command should be:  node liri.js spotify-this-song song name here
+//variable to capture the song title?
+  var songTitle = process.argv[3];
+
+  var spotify = new Spotify({
+    id: keys.spotifyKeys.client_key,
+    secret: keys.spotifyKeys.client_secret
+  });
+   //spotify built in call below
+  spotify.search({ type: 'track', query: songTitle}, function(err, data) {
+    if (err) {
+      return console.log('Error occurred: ' + err );
+    }
+  console.log(data); 
+  var songInfo = JSON.parse(data);
+  console.log(songInfo.album.name);
+
+
+  });
+//console log all of the spotify data here; FIND THE JSON FORMAT 
+// o Artist(s)
+// o The song's name
+// o A preview link of the song from Spotify
+// o The album that the song is from
+//// • If no song is provided then your program will default to "The Sign" by Ace of Base.
+   // console.log(data.album.name);
+
+
 
 }
 
@@ -146,8 +152,8 @@ function random(){
 //https://www.npmjs.com/package/twitter
 // twitter rest api info here:  https://www.npmjs.com/package/twitter
 // npm for omdb for later exploration:  https://www.npmjs.com/package/omdb
-// 
-// 
+// data that returns for the spotify api:  https://developer.spotify.com/web-api/endpoint-reference/
+// more on data for the spotify api track info JSON:  https://developer.spotify.com/web-api/get-track/
 // 
 // 
 // 
