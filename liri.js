@@ -154,8 +154,57 @@ fs.readFile("random.txt", "utf8", function(error, data){
   if(error){
     console.log("there was a problem reading this file:" + error);
   }
-    //prints out the content of data
-    console.log(data);
+    // //prints out the content of data
+    // console.log(data);
+
+    //selects random number 
+    var number = Math.floor(Math.random()*3)+ 1;
+
+    if(number = 1){
+    var title = "frozen";
+    var queryUrl= "http://www.omdbapi.com/?apikey="+keys.movieKeys.apikey +"&t=" + title;
+    request(queryUrl, function (error, response, body) {
+      var movieInfo = JSON.parse(body);
+       //print out specific info from the body
+
+        console.log("Title: " + movieInfo.Title);
+        console.log("Year: " + movieInfo.Year);
+        console.log("IMDB Rating: " + movieInfo.Ratings[2].Value);
+        console.log("Rotten Tomatoes Rating: " + movieInfo.Ratings[1].Value);
+        console.log("Country: " + movieInfo.Country);
+        console.log("Language: " + movieInfo.Language);
+        console.log("Plot: " + movieInfo.Plot);
+      }
+    );} else if(number = 2){
+      tweets();
+    }else {
+      console.log("you picked 3");
+        }
+
+      // switch(number)
+      // {
+      //   case 1:
+      //   movie("Moana");
+      //   break;
+
+      //   case 2:
+      //   tweets();
+      //   break;
+
+      //   case 3:
+      //   music("Numa numa");
+      //   break;
+
+      // }
+
+      fs.appendFile("random.txt", number, function(error){
+        if(error){
+          console.log("there was an error:" + error);
+         }   
+        
+  }); 
+});
+}
     //turn data into an object or array?
     // var dataArr = [];
     // var data = data.split(",");
@@ -167,44 +216,42 @@ fs.readFile("random.txt", "utf8", function(error, data){
     // var newCommand = dataArr[1];
     // // console.log(newCommand); 
    
-});
-
 //using append etc. to make liri call on one of the other functions?
   //take the values from the text file, and call one of the functions based on the info?
 //call the switch statement again
 
-  var command = process.argv[2];
+//   var command = process.argv[2];
 
-   fs.appendFile("random.txt", command, function(error){
-    if(error){
-      console.log("there was an error:" + error);
-    } else{
+//    fs.appendFile("random.txt", command, function(error){
+//     if(error){
+//       console.log("there was an error:" + error);
+//     } else{
 
-          switch (command) {
-          case "movie-this":
-            movie();
-            break;
+//           switch (command) {
+//           case "movie-this":
+//             movie();
+//             break;
 
-          case "my-tweets":
-            tweets();
-            break;
+//           case "my-tweets":
+//             tweets();
+//             break;
 
-          case "spotify-this-song":
-            music();
-            break;
+//           case "spotify-this-song":
+//             music();
+//             break;
 
-          case "do-what-it-says":
-            random();
-            break;
-        }
+//           case "do-what-it-says":
+//             random();
+//             break;
+//         }
 
-    }//ends the else
+//     }//ends the else
 
-   });//ends the appendfile
+//    });//ends the appendfile
 
-//set up an if/else functino to do this?
+// //set up an if/else functino to do this?
 
-}
+
 
 
 
