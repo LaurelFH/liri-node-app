@@ -157,15 +157,15 @@ fs.readFile("random.txt", "utf8", function(error, data){
     //prints out the content of data
     console.log(data);
     //turn data into an object or array?
-    var dataArr = [];
-    var data = data.split(",");
-    // dataArr.push(data);
-    // console.log(dataArr);
-    // console.log(data);
+    // var dataArr = [];
+    // var data = data.split(",");
+    // // dataArr.push(data);
+    // // console.log(dataArr);
+    // // console.log(data);
 
-    //take the first index and store it as a new command?
-    var newCommand = dataArr[1];
-    // console.log(newCommand); 
+    // //take the first index and store it as a new command?
+    // var newCommand = dataArr[1];
+    // // console.log(newCommand); 
    
 });
 
@@ -173,42 +173,36 @@ fs.readFile("random.txt", "utf8", function(error, data){
   //take the values from the text file, and call one of the functions based on the info?
 //call the switch statement again
 
-  // var command = process.argv[2];
+  var command = process.argv[2];
 
-  //  fs.appendFile("random.txt", command, function(error){
-  //   if(error){
-  //     console.log("there was an error:" + error);
-  //   } else{
+   fs.appendFile("random.txt", command, function(error){
+    if(error){
+      console.log("there was an error:" + error);
+    } else{
 
-  //             switch (command) {
-  //         case "movie-this":
-  //           movie();
-  //           break;
+          switch (command) {
+          case "movie-this":
+            movie();
+            break;
 
-  //         case "my-tweets":
-  //           tweets();
-  //           break;
+          case "my-tweets":
+            tweets();
+            break;
 
-  //         case "spotify-this-song":
-  //           music();
-  //           break;
+          case "spotify-this-song":
+            music();
+            break;
 
-  //         case "do-what-it-says":
-  //           random();
-  //           break;
-  //       }
+          case "do-what-it-says":
+            random();
+            break;
+        }
 
-  //   }//ends the else
+    }//ends the else
 
-  //  })//ends the appendfile
+   });//ends the appendfile
 
 //set up an if/else functino to do this?
-
-
-
-
-
-
 
 }
 
