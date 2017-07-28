@@ -173,9 +173,6 @@ function music(){
 // }, 1000);
 
 
-
-
-
   //version that returns an object 
   var spotify = new Spotify({
     id: keys.spotifyKeys.client_key,
@@ -184,13 +181,14 @@ function music(){
 
   
    //spotify built in call below
-  spotify.search({ type: 'artist', query: songTitle}, function(err, body) {
+  spotify.search({ type: 'track', query: songTitle}, function(err, body) {
     if (err) {
       return console.log('Error occurred: ' + err );
     }
 
-  console.log(songTitle);
-  console.log(spotify);
+  // console.log(songTitle);
+  // console.log(spotify);
+  console.log(body.tracks.items[0]);
   var songInfo = JSON.stringify(body);
   // console.log(body.tracks);
   // var songInfo = JSON.Stringify(body);
