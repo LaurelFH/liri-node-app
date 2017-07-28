@@ -139,13 +139,6 @@ function music(){
   // var songInfo = JSON.stringify(body);
 
   });
-//console log all of the spotify data here; FIND THE JSON FORMAT 
-// o Artist(s)
-// o The song's name
-// o A preview link of the song from Spotify
-// o The album that the song is from
-//// • If no song is provided then your program will default to "The Sign" by Ace of Base.
-   // console.log(data.album.name);
 
 }
 
