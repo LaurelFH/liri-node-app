@@ -129,16 +129,15 @@ function music(){
       return console.log('Error occurred: ' + err );
     }
 
-  // console.log(songTitle);
-  // console.log(spotify);
-  console.log(body.tracks.items[0]);
-  var songInfo = JSON.stringify(body);
   // console.log(body.tracks);
-  // var songInfo = JSON.Stringify(body);
-  // console.log(songInfo.name);
-  // console.log(body.artists);
-  // console.log(songInfo.items[0]);
-  // console.log(songInfo.artists.items);
+  console.log("Artist name: " + body.tracks.items[0].artists[0].name);
+  console.log("Song preview: " + body.tracks.items[0].preview_url);
+  console.log("Song name: " + body.tracks.items[0].name);
+  console.log("From the album: " + body.tracks.items[0].album.name);
+  // console.log("Preview this song: " + body.tracks.preview_url);
+  // console.log(body.tracks.items.artists[0].name);
+  // var songInfo = JSON.stringify(body);
+
   });
 //console log all of the spotify data here; FIND THE JSON FORMAT 
 // o Artist(s)

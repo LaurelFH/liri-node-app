@@ -23,7 +23,7 @@ exports.spotifyKeys = {
 
 
 // //OMDB
-//doube check the format for this one (since the key is now in the liri doc)
+//double check the format for this one (since the key is now in the liri doc)
 exports.movieKeys = {
   apikey: '40e9cece',
 }
