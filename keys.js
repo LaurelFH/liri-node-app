@@ -1,5 +1,5 @@
 console.log('these keys have loaded');
-
+console.log("Enter all Ziri requests with quotation marks" + " ex.'Pay the Man' or 'The Blind Side'");
 
 //info for all of the api keys 
 

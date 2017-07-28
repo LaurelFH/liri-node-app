@@ -116,63 +116,6 @@ function music(){
     clientSecret: keys.spotifyKeys.client_secret
   });
 
-// //version that contians a wrapper
-//   spotifyApi.searchTracks(songTitle)
-//     .then(function(data) {
-//      console.log('Search by Song title', data);
-//      // console.log(data);
-//       }, function(err) {
-//         console.error("Something went wrong with the request", err);
-//       });
-
-    // //reading the response-- check key/value names! 
-    // var songInfo = JSON.parse(data);
-    // console.log(data.name);
-    // console.log(songInfo.preview_url);
-    // console.log(songInfo.year);
-
-// //double check the token problem with the other version with 401 error:
-// //https://github.com/thelinmichael/spotify-web-api-node/issues/86
-//   // When our access token will expire
-// var tokenExpirationEpoch;
-// var authorizationCode = 
-// // First retrieve an access token
-// spotifyApi.authorizationCodeGrant(authorizationCode)
-//   .then(function(data) {
-
-//     // Set the access token and refresh token
-//     spotifyApi.setAccessToken(data.body['access_token']);
-//     spotifyApi.setRefreshToken(data.body['refresh_token']);
-
-//     // Save the amount of seconds until the access token expired
-//     tokenExpirationEpoch = (new Date().getTime() / 1000) + data.body['expires_in'];
-//     console.log('Retrieved token. It expires in ' + Math.floor(tokenExpirationEpoch - new Date().getTime() / 1000) + ' seconds!');
-//   }, function(err) {
-//     console.log('Something went wrong when retrieving the access token!', err.message);
-//   });
-
-// // Continually print out the time left until the token expires..
-// var numberOfTimesUpdated = 0;
-
-// setInterval(function() {
-//   console.log('Time left: ' + Math.floor((tokenExpirationEpoch - new Date().getTime() / 1000)) + ' seconds left!');
-
-//   // OK, we need to refresh the token. Stop printing and refresh.
-//   if (++numberOfTimesUpdated > 5) {
-//     clearInterval(this);
-
-//     // Refresh token and print the new time to expiration.
-//     spotifyApi.refreshAccessToken()
-//       .then(function(data) {
-//         tokenExpirationEpoch = (new Date().getTime() / 1000) + data.body['expires_in'];
-//         console.log('Refreshed token. It now expires in ' + Math.floor(tokenExpirationEpoch - new Date().getTime() / 1000) + ' seconds!');
-//       }, function(err) {
-//         console.log('Could not refresh the token!', err.message);
-//       });
-//   }
-// }, 1000);
-
-
   //version that returns an object 
   var spotify = new Spotify({
     id: keys.spotifyKeys.client_key,
