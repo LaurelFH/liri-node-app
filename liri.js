@@ -115,18 +115,21 @@ function music(){
     clientId: keys.spotifyKeys.client_key,
     clientSecret: keys.spotifyKeys.client_secret
   });
-//version that contians a wrapper
+
+// //version that contians a wrapper
 //   spotifyApi.searchTracks(songTitle)
 //     .then(function(data) {
 //      console.log('Search by Song title', data);
+//      // console.log(data);
 //       }, function(err) {
 //         console.error("Something went wrong with the request", err);
 //       });
-//     //reading the response-- check key/value names! 
-//     // var songInfo = JSON.parse(data);
-//     // console.log(data.name);
-//     // console.log(songInfo.preview_url);
-//     // console.log(songInfo.year);
+
+    // //reading the response-- check key/value names! 
+    // var songInfo = JSON.parse(data);
+    // console.log(data.name);
+    // console.log(songInfo.preview_url);
+    // console.log(songInfo.year);
 
 // //double check the token problem with the other version with 401 error:
 // //https://github.com/thelinmichael/spotify-web-api-node/issues/86
@@ -174,23 +177,28 @@ function music(){
 
 
   //version that returns an object 
-  // var spotify = new Spotify({
-  //   id: keys.spotifyKeys.client_key,
-  //   secret: keys.spotifyKeys.client_secret
-  // });
+  var spotify = new Spotify({
+    id: keys.spotifyKeys.client_key,
+    secret: keys.spotifyKeys.client_secret
+  });
 
   
-  //  //spotify built in call below
-  // spotify.search({ type: 'artist', query: songTitle}, function(err, body) {
-  //   if (err) {
-  //     return console.log('Error occurred: ' + err );
-  //   }
-  // console.log(body); 
-  // // var songInfo = JSON.parse(body);
-  // var songInfo = JSON.stringify(body);
-  // console.log(songInfo.name);
+   //spotify built in call below
+  spotify.search({ type: 'artist', query: songTitle}, function(err, body) {
+    if (err) {
+      return console.log('Error occurred: ' + err );
+    }
 
-  // });
+  console.log(songTitle);
+  console.log(spotify);
+  var songInfo = JSON.stringify(body);
+  // console.log(body.tracks);
+  // var songInfo = JSON.Stringify(body);
+  // console.log(songInfo.name);
+  // console.log(body.artists);
+  // console.log(songInfo.items[0]);
+  // console.log(songInfo.artists.items);
+  });
 //console log all of the spotify data here; FIND THE JSON FORMAT 
 // o Artist(s)
 // o The song's name
