@@ -92,7 +92,8 @@ var params = {screen_name: userName, count: 20, include_rts: true};
 client.get('statuses/user_timeline', params, function(error, tweets, response) {
   if (!error) {
    //making sure I got the tweets loaded
-   for(var i = 0; i <= tweets.length; i++){
+   //had to remove the <= due to it returning undefined in that loop!!! Aug 3
+   for(var i = 0; i < tweets.length; i++){
     console.log(tweets[i].text);
      console.log(tweets[i].created_at);
    }//ends my for loop
