@@ -1,3 +1,4 @@
+//add this file to the gitignore file
 console.log('these keys have loaded');
 console.log("Enter all Ziri requests with quotation marks" + " ex.'Pay the Man' or 'The Blind Side'");
 
